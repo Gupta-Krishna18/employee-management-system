@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -41,7 +41,7 @@ export class EmployeeListComponent implements OnInit {
 
 
     constructor(
-        private employeeService: EmployeeService
+        private employeeService: EmployeeService, private cdr: ChangeDetectorRef
     ) {}
 
 
@@ -68,7 +68,7 @@ export class EmployeeListComponent implements OnInit {
 
                     this.employees = data;
 
-                    this.isLoading = false;
+                    this.isLoading = false; this.cdr.detectChanges();
                 },
 
                 error: (error: any) => {
@@ -78,7 +78,7 @@ export class EmployeeListComponent implements OnInit {
                         error
                     );
 
-                    this.isLoading = false;
+                    this.isLoading = false; this.cdr.detectChanges();
                 }
 
             });
@@ -118,7 +118,7 @@ export class EmployeeListComponent implements OnInit {
 
                     this.employees = data;
 
-                    this.isLoading = false;
+                    this.isLoading = false; this.cdr.detectChanges();
                 },
 
                 error: (error: any) => {
@@ -128,7 +128,7 @@ export class EmployeeListComponent implements OnInit {
                         error
                     );
 
-                    this.isLoading = false;
+                    this.isLoading = false; this.cdr.detectChanges();
 
                     alert(
                         error.error?.message ||
@@ -236,7 +236,7 @@ export class EmployeeListComponent implements OnInit {
                         response.totalPages;
 
 
-                    this.isLoading = false;
+                    this.isLoading = false; this.cdr.detectChanges();
                 },
 
 
@@ -248,7 +248,7 @@ export class EmployeeListComponent implements OnInit {
                     );
 
 
-                    this.isLoading = false;
+                    this.isLoading = false; this.cdr.detectChanges();
                 }
 
             });

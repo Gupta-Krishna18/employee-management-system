@@ -1,21 +1,34 @@
-<div class="dashboard-page">
-    <div class="dashboard-heading">
-        <div><p class="eyebrow">Workspace overview</p><h2>Dashboard</h2><p>Choose a module to view and manage its details.</p></div>
-        <a class="new-project-button" routerLink="/projects/new">+ New project</a>
+<section class="dashboard-page">
+  <div class="dashboard-heading">
+    <div><p class="eyebrow">Workspace / overview</p><h1>Good morning, Krishna</h1><p>Here’s the latest across your team’s work.</p></div>
+    <div class="header-actions"><a class="secondary-action" routerLink="/tasks/new">Create task</a><a class="new-project-button" routerLink="/projects/new">+ Create project</a></div>
+  </div>
+
+  @if (isLoading) { <div class="dashboard-loading"><div class="spinner-border" role="status"></div><p>Loading workspace...</p></div> }
+
+  @if (!isLoading && dashboard) {
+    <div class="summary-grid">
+      <a class="summary-card projects" routerLink="/projects"><span class="card-icon">▣</span><span class="card-label">Projects</span><strong>{{ dashboard.totalProjects }}</strong><span class="card-link">View all projects →</span></a>
+      <a class="summary-card tasks" routerLink="/tasks"><span class="card-icon">✓</span><span class="card-label">Open tasks</span><strong>{{ dashboard.pendingTasks }}</strong><span class="card-link">Manage tasks →</span></a>
+      <a class="summary-card people" routerLink="/employees"><span class="card-icon">♙</span><span class="card-label">People</span><strong>{{ dashboard.totalEmployees }}</strong><span class="card-link">View team directory →</span></a>
+      <a class="summary-card teams" routerLink="/departments"><span class="card-icon">◈</span><span class="card-label">Teams</span><strong>{{ dashboard.totalDepartments }}</strong><span class="card-link">View teams →</span></a>
     </div>
 
-    @if (isLoading) {
-        <div class="text-center"><div class="spinner-border" role="status"></div><p class="mt-2">Loading dashboard...</p></div>
-    }
+    <div class="workspace-grid">
+      <section class="panel delivery-panel">
+        <div class="panel-heading"><div><p class="panel-kicker">Delivery health</p><h2>Task progress</h2></div><a routerLink="/tasks">View tasks</a></div>
+        <div class="progress-overview"><div class="completion-ring"><span>{{ completionRate }}%</span></div><div><strong>{{ dashboard.completedTasks }} tasks completed</strong><p>{{ dashboard.pendingTasks }} tasks are still in progress or waiting to start.</p></div></div>
+        <div class="progress-track"><span [style.width.%]="completionRate"></span></div>
+        <div class="progress-legend"><span><i class="done-dot"></i> Done {{ dashboard.completedTasks }}</span><span><i class="open-dot"></i> Open {{ dashboard.pendingTasks }}</span></div>
+      </section>
+      <section class="panel quick-panel">
+        <div class="panel-heading"><div><p class="panel-kicker">Shortcuts</p><h2>Keep work moving</h2></div></div>
+        <a routerLink="/tasks/new" class="quick-link"><span class="quick-symbol purple">+</span><span><strong>Create a task</strong><small>Add work to a project</small></span><b>›</b></a>
+        <a routerLink="/projects/new" class="quick-link"><span class="quick-symbol blue">▣</span><span><strong>Start a project</strong><small>Set up a new initiative</small></span><b>›</b></a>
+        <a routerLink="/employees" class="quick-link"><span class="quick-symbol green">♙</span><span><strong>Manage people</strong><small>Update your team directory</small></span><b>›</b></a>
+      </section>
+    </div>
 
-    @if (!isLoading && dashboard) {
-        <div class="row g-4">
-            <div class="col-md-4"><a class="card shadow-sm dashboard-card" routerLink="/employees"><div class="card-body"><h5>Total Employees</h5><h2>{{ dashboard.totalEmployees }}</h2><span>Open employees</span></div></a></div>
-            <div class="col-md-4"><a class="card shadow-sm dashboard-card" routerLink="/departments"><div class="card-body"><h5>Total Departments</h5><h2>{{ dashboard.totalDepartments }}</h2><span>Open departments</span></div></a></div>
-            <div class="col-md-4"><a class="card shadow-sm dashboard-card" routerLink="/projects"><div class="card-body"><h5>Total Projects</h5><h2>{{ dashboard.totalProjects }}</h2><span>Open projects</span></div></a></div>
-            <div class="col-md-4"><a class="card shadow-sm dashboard-card" routerLink="/tasks"><div class="card-body"><h5>Total Tasks</h5><h2>{{ dashboard.totalTasks }}</h2><span>Open tasks</span></div></a></div>
-            <div class="col-md-4"><a class="card shadow-sm dashboard-card" routerLink="/tasks"><div class="card-body"><h5>Completed Tasks</h5><h2>{{ dashboard.completedTasks }}</h2><span>View all tasks</span></div></a></div>
-            <div class="col-md-4"><a class="card shadow-sm dashboard-card" routerLink="/tasks"><div class="card-body"><h5>Pending Tasks</h5><h2>{{ dashboard.pendingTasks }}</h2><span>View all tasks</span></div></a></div>
-        </div>
-    }
-</div>
+    <section class="module-strip"><div><p class="panel-kicker">Workspace</p><h2>Jump to a module</h2></div><div class="module-links"><a routerLink="/projects">Projects <span>{{ dashboard.totalProjects }}</span></a><a routerLink="/tasks">Tasks <span>{{ dashboard.totalTasks }}</span></a><a routerLink="/employees">People <span>{{ dashboard.totalEmployees }}</span></a><a routerLink="/departments">Teams <span>{{ dashboard.totalDepartments }}</span></a></div></section>
+  }
+</section>
