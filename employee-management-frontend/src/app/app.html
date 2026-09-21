@@ -1,54 +1,13 @@
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-    <div class="container">
-
-        <a class="navbar-brand" routerLink="/dashboard">
-            EMS
-        </a>
-
-        <div class="navbar-nav">
-
-            <a
-                class="nav-link"
-                routerLink="/dashboard"
-                routerLinkActive="active">
-                Dashboard
-            </a>
-
-            <a
-                class="nav-link"
-                routerLink="/employees"
-                routerLinkActive="active">
-                Employees
-            </a>
-
-            <a
-                class="nav-link"
-                routerLink="/departments"
-                routerLinkActive="active">
-                Departments
-            </a>
-
-            <a
-                class="nav-link"
-                routerLink="/projects"
-                routerLinkActive="active">
-                Projects
-            </a>
-
-            <a
-                class="nav-link"
-                routerLink="/tasks"
-                routerLinkActive="active">
-                Tasks
-            </a>
-
-        </div>
-
-    </div>
-</nav>
-
-<main class="container mt-4">
-
-    <router-outlet></router-outlet>
-
-</main>
+<div class="app-shell">
+  <header class="site-header"><nav class="site-nav container" aria-label="Primary navigation">
+    <a class="brand" routerLink="/dashboard" aria-label="Flowbase dashboard"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M7 9.5 16 4l9 5.5v10.8L16 26l-9-5.7V9.5Z" fill="currentColor" opacity=".18"/><path d="m7 9.5 9 5.3 9-5.3M16 14.8V26M7 9.5 16 4l9 5.5v10.8L16 26l-9-5.7V9.5Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></span><span>flow<span>base</span></span></a>
+    <div class="nav-links"><a routerLink="/dashboard" routerLinkActive="active">Overview</a><a routerLink="/projects" routerLinkActive="active">Projects</a><a routerLink="/tasks" routerLinkActive="active">Tasks</a><a routerLink="/employees" routerLinkActive="active">People</a><a routerLink="/departments" routerLinkActive="active">Teams</a></div>
+    <a class="create-project" routerLink="/projects/new"><span aria-hidden="true">+</span> Create project</a>
+  </nav></header>
+  <main class="page-content container"><router-outlet></router-outlet></main>
+  <footer class="site-footer"><div class="container footer-content">
+    <div><a class="brand footer-brand" routerLink="/dashboard"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M7 9.5 16 4l9 5.5v10.8L16 26l-9-5.7V9.5Z" fill="currentColor" opacity=".18"/><path d="m7 9.5 9 5.3 9-5.3M16 14.8V26M7 9.5 16 4l9 5.5v10.8L16 26l-9-5.7V9.5Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></span><span>flow<span>base</span></span></a><p>Bring projects, people, and daily work into one calm workspace.</p></div>
+    <div class="footer-links" aria-label="Workspace links"><a routerLink="/projects">All projects</a><a routerLink="/tasks">My tasks</a><a routerLink="/employees">Team directory</a></div>
+    <p class="copyright">© 2026 Flowbase. Built for better work.</p>
+  </div></footer>
+</div>

@@ -170,7 +170,6 @@ public class TaskController {
             @PathVariable Long id) {
 
         taskService.deleteTask(id);
-        System.out.println("Check the condition is true or not");
         return ResponseEntity.noContent().build();
     }
 }

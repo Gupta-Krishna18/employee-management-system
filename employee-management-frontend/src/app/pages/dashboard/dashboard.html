@@ -1,157 +1,21 @@
-<div class="container mt-4">
-
-    <h2 class="mb-4">
-        Dashboard
-    </h2>
+<div class="dashboard-page">
+    <div class="dashboard-heading">
+        <div><p class="eyebrow">Workspace overview</p><h2>Dashboard</h2><p>Choose a module to view and manage its details.</p></div>
+        <a class="new-project-button" routerLink="/projects/new">+ New project</a>
+    </div>
 
     @if (isLoading) {
-
-        <div class="text-center">
-
-            <div
-                class="spinner-border"
-                role="status">
-            </div>
-
-            <p class="mt-2">
-                Loading dashboard...
-            </p>
-
-        </div>
-
+        <div class="text-center"><div class="spinner-border" role="status"></div><p class="mt-2">Loading dashboard...</p></div>
     }
 
     @if (!isLoading && dashboard) {
-
         <div class="row g-4">
-
-            <div class="col-md-4">
-
-                <div class="card shadow-sm">
-
-                    <div class="card-body">
-
-                        <h5>
-                            Total Employees
-                        </h5>
-
-                        <h2>
-                            {{ dashboard.totalEmployees }}
-                        </h2>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-md-4">
-
-                <div class="card shadow-sm">
-
-                    <div class="card-body">
-
-                        <h5>
-                            Total Departments
-                        </h5>
-
-                        <h2>
-                            {{ dashboard.totalDepartments }}
-                        </h2>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-md-4">
-
-                <div class="card shadow-sm">
-
-                    <div class="card-body">
-
-                        <h5>
-                            Total Projects
-                        </h5>
-
-                        <h2>
-                            {{ dashboard.totalProjects }}
-                        </h2>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-md-4">
-
-                <div class="card shadow-sm">
-
-                    <div class="card-body">
-
-                        <h5>
-                            Total Tasks
-                        </h5>
-
-                        <h2>
-                            {{ dashboard.totalTasks }}
-                        </h2>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-md-4">
-
-                <div class="card shadow-sm">
-
-                    <div class="card-body">
-
-                        <h5>
-                            Completed Tasks
-                        </h5>
-
-                        <h2>
-                            {{ dashboard.completedTasks }}
-                        </h2>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-md-4">
-
-                <div class="card shadow-sm">
-
-                    <div class="card-body">
-
-                        <h5>
-                            Pending Tasks
-                        </h5>
-
-                        <h2>
-                            {{ dashboard.pendingTasks }}
-                        </h2>
-
-                    </div>
-
-                </div>
-
-            </div>
-
+            <div class="col-md-4"><a class="card shadow-sm dashboard-card" routerLink="/employees"><div class="card-body"><h5>Total Employees</h5><h2>{{ dashboard.totalEmployees }}</h2><span>Open employees</span></div></a></div>
+            <div class="col-md-4"><a class="card shadow-sm dashboard-card" routerLink="/departments"><div class="card-body"><h5>Total Departments</h5><h2>{{ dashboard.totalDepartments }}</h2><span>Open departments</span></div></a></div>
+            <div class="col-md-4"><a class="card shadow-sm dashboard-card" routerLink="/projects"><div class="card-body"><h5>Total Projects</h5><h2>{{ dashboard.totalProjects }}</h2><span>Open projects</span></div></a></div>
+            <div class="col-md-4"><a class="card shadow-sm dashboard-card" routerLink="/tasks"><div class="card-body"><h5>Total Tasks</h5><h2>{{ dashboard.totalTasks }}</h2><span>Open tasks</span></div></a></div>
+            <div class="col-md-4"><a class="card shadow-sm dashboard-card" routerLink="/tasks"><div class="card-body"><h5>Completed Tasks</h5><h2>{{ dashboard.completedTasks }}</h2><span>View all tasks</span></div></a></div>
+            <div class="col-md-4"><a class="card shadow-sm dashboard-card" routerLink="/tasks"><div class="card-body"><h5>Pending Tasks</h5><h2>{{ dashboard.pendingTasks }}</h2><span>View all tasks</span></div></a></div>
         </div>
-
     }
-
 </div>
