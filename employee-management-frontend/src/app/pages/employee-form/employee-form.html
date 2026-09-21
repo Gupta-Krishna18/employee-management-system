@@ -1,0 +1,203 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h2>
+        {{ isEditMode ? 'Edit Employee' : 'Add Employee' }}
+    </h2>
+
+    <a
+        routerLink="/employees"
+        class="btn btn-secondary">
+        Back
+    </a>
+
+</div>
+
+
+<form
+    [formGroup]="employeeForm"
+    (ngSubmit)="onSubmit()">
+
+    <!-- First Name + Last Name -->
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+
+            <label class="form-label">
+                First Name
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                formControlName="firstName">
+
+            @if (
+                employeeForm.get('firstName')?.touched &&
+                employeeForm.get('firstName')?.invalid
+            ) {
+                <div class="text-danger mt-1">
+                    First name is required and must be
+                    between 2 and 50 characters.
+                </div>
+            }
+
+        </div>
+
+
+        <div class="col-md-6 mb-3">
+
+            <label class="form-label">
+                Last Name
+            </label>
+
+            <input
+                type="text"
+                class="form-control"
+                formControlName="lastName">
+
+            @if (
+                employeeForm.get('lastName')?.touched &&
+                employeeForm.get('lastName')?.invalid
+            ) {
+                <div class="text-danger mt-1">
+                    Last name is required and must be
+                    between 2 and 50 characters.
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+
+    <!-- Email -->
+    <div class="mb-3">
+
+        <label class="form-label">
+            Email
+        </label>
+
+        <input
+            type="email"
+            class="form-control"
+            formControlName="email">
+
+        @if (
+            employeeForm.get('email')?.touched &&
+            employeeForm.get('email')?.invalid
+        ) {
+            <div class="text-danger mt-1">
+                Please enter a valid email.
+            </div>
+        }
+
+    </div>
+
+
+    <!-- Phone -->
+    <div class="mb-3">
+
+        <label class="form-label">
+            Phone
+        </label>
+
+        <input
+            type="text"
+            class="form-control"
+            formControlName="phone">
+
+        @if (
+            employeeForm.get('phone')?.touched &&
+            employeeForm.get('phone')?.invalid
+        ) {
+            <div class="text-danger mt-1">
+                Phone number must contain exactly 10 digits.
+            </div>
+        }
+
+    </div>
+
+
+    <!-- Designation -->
+    <div class="mb-3">
+
+        <label class="form-label">
+            Designation
+        </label>
+
+        <input
+            type="text"
+            class="form-control"
+            formControlName="designation">
+
+        @if (
+            employeeForm.get('designation')?.touched &&
+            employeeForm.get('designation')?.invalid
+        ) {
+            <div class="text-danger mt-1">
+                Designation is required and must be
+                between 2 and 100 characters.
+            </div>
+        }
+
+    </div>
+
+
+    <!-- Joining Date -->
+    <div class="mb-3">
+
+        <label class="form-label">
+            Joining Date
+        </label>
+
+        <input
+            type="date"
+            class="form-control"
+            formControlName="joiningDate">
+
+        @if (
+            employeeForm.get('joiningDate')?.touched &&
+            employeeForm.get('joiningDate')?.invalid
+        ) {
+            <div class="text-danger mt-1">
+                Joining date is required.
+            </div>
+        }
+
+    </div>
+
+
+    <!-- Department ID -->
+    <div class="mb-3">
+
+        <label class="form-label">
+            Department ID
+        </label>
+
+        <input
+            type="number"
+            class="form-control"
+            formControlName="departmentId">
+
+        @if (
+            employeeForm.get('departmentId')?.touched &&
+            employeeForm.get('departmentId')?.invalid
+        ) {
+            <div class="text-danger mt-1">
+                Department ID is required.
+            </div>
+        }
+
+    </div>
+
+
+    <!-- Submit Button -->
+    <button
+        type="submit"
+        class="btn btn-primary">
+
+        {{ isEditMode ? 'Update Employee' : 'Save Employee' }}
+
+    </button>
+
+</form>

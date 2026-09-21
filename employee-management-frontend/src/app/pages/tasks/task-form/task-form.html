@@ -1,0 +1,292 @@
+<div class="container mt-4">
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3>
+                {{ isEditMode ? 'Edit Task' : 'Add Task' }}
+            </h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+
+                <!-- Title -->
+
+                <div class="mb-3">
+
+                    <label for="title" class="form-label">
+                        Title
+                    </label>
+
+                    <input type="text" id="title" class="form-control" formControlName="title">
+
+                    @if (
+                    taskForm.get('title')?.invalid &&
+                    taskForm.get('title')?.touched
+                    ) {
+
+                    <div class="text-danger">
+
+                        @if (
+                        taskForm.get('title')?.errors?.['required']
+                        ) {
+                        Title is required.
+                        }
+
+                        @if (
+                        taskForm.get('title')?.errors?.['minlength']
+                        ) {
+                        Title must be at least 2 characters.
+                        }
+
+                        @if (
+                        taskForm.get('title')?.errors?.['maxlength']
+                        ) {
+                        Title cannot exceed 200 characters.
+                        }
+
+                    </div>
+
+                    }
+
+                </div>
+
+
+                <!-- Description -->
+
+                <div class="mb-3">
+
+                    <label for="description" class="form-label">
+                        Description
+                    </label>
+
+                    <textarea id="description" class="form-control" rows="4" formControlName="description"></textarea>
+
+                </div>
+
+
+                <!-- Priority -->
+
+                <div class="mb-3">
+
+                    <label for="priority" class="form-label">
+                        Priority
+                    </label>
+
+                    <select id="priority" class="form-select" formControlName="priority">
+
+                        <option value="">
+                            Select Priority
+                        </option>
+
+                        <option value="LOW">
+                            LOW
+                        </option>
+
+                        <option value="MEDIUM">
+                            MEDIUM
+                        </option>
+
+                        <option value="HIGH">
+                            HIGH
+                        </option>
+
+                        <option value="CRITICAL">
+                            CRITICAL
+                        </option>
+
+                    </select>
+
+                    @if (
+                    taskForm.get('priority')?.invalid &&
+                    taskForm.get('priority')?.touched
+                    ) {
+
+                    <div class="text-danger">
+                        Priority is required.
+                    </div>
+
+                    }
+
+                </div>
+
+
+                <!-- Status -->
+
+                <div class="mb-3">
+
+                    <label for="status" class="form-label">
+                        Status
+                    </label>
+
+                    <select id="status" class="form-select" formControlName="status">
+
+                        <option value="">
+                            Select Status
+                        </option>
+
+                        <option value="TODO">
+                            TODO
+                        </option>
+
+                        <option value="IN_PROGRESS">
+                            IN_PROGRESS
+                        </option>
+
+                        <option value="COMPLETED">
+                            COMPLETED
+                        </option>
+
+                        <option value="CANCELLED">
+                            CANCELLED
+                        </option>
+
+                    </select>
+
+                    @if (
+                    taskForm.get('status')?.invalid &&
+                    taskForm.get('status')?.touched
+                    ) {
+
+                    <div class="text-danger">
+                        Status is required.
+                    </div>
+
+                    }
+
+                </div>
+
+                <!-- due date -->
+
+                <div class="mb-3">
+
+                    <label for="dueDate" class="form-label">
+                        Due Date
+                    </label>
+
+                    <input type="date" id="dueDate" class="form-control" formControlName="dueDate">
+
+                    @if (
+                    taskForm.get('dueDate')?.invalid &&
+                    taskForm.get('dueDate')?.touched
+                    ) {
+
+                    <div class="text-danger">
+                        Due date is required.
+                    </div>
+
+                    }
+
+                </div>
+
+
+                <!-- Project -->
+
+                <div class="mb-3">
+
+                    <label for="projectId" class="form-label">
+                        Project
+                    </label>
+
+                    <select id="projectId" class="form-select" formControlName="projectId">
+
+                        <option [ngValue]="null">
+                            Select Project
+                        </option>
+
+                        @for (
+                        project of projects;
+                        track project.id
+                        ) {
+
+                        <option [ngValue]="project.id">
+
+                            {{ project.name }}
+
+                        </option>
+
+                        }
+
+                    </select>
+
+                    @if (
+                    taskForm.get('projectId')?.invalid &&
+                    taskForm.get('projectId')?.touched
+                    ) {
+
+                    <div class="text-danger">
+                        Project is required.
+                    </div>
+
+                    }
+
+                </div>
+
+
+                <!-- Assigned To -->
+
+                <div class="mb-3">
+
+                    <label for="assignedToId" class="form-label">
+                        Assigned To
+                    </label>
+
+                    <select id="assignedToId" class="form-select" formControlName="assignedToId">
+
+                        <option [ngValue]="null">
+                            Select Employee
+                        </option>
+
+                        @for (
+                        employee of employees;
+                        track employee.id
+                        ) {
+
+                        <option [ngValue]="employee.id">
+
+                            {{ employee.firstName }}
+                            {{ employee.lastName }}
+
+                        </option>
+
+                        }
+
+                    </select>
+
+                    @if (
+                    taskForm.get('assignedToId')?.invalid &&
+                    taskForm.get('assignedToId')?.touched
+                    ) {
+
+                    <div class="text-danger">
+                        Employee is required.
+                    </div>
+
+                    }
+
+                </div>
+
+
+                <!-- Buttons -->
+
+                <button type="submit" class="btn btn-primary me-2">
+
+                    {{ isEditMode ? 'Update Task' : 'Create Task' }}
+
+                </button>
+
+                <a routerLink="/tasks" class="btn btn-secondary">
+                    Cancel
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

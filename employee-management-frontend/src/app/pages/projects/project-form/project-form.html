@@ -1,0 +1,235 @@
+<div class="container mt-4">
+
+    <h2>
+        {{ isEditMode ? 'Edit Project' : 'Add Project' }}
+    </h2>
+
+    <form
+        [formGroup]="projectForm"
+        (ngSubmit)="onSubmit()"
+    >
+
+        <!-- Project Name -->
+        <div class="mb-3">
+
+            <label
+                for="name"
+                class="form-label"
+            >
+                Project Name
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                class="form-control"
+                formControlName="name"
+            >
+
+            @if (
+                projectForm.get('name')?.invalid &&
+                projectForm.get('name')?.touched
+            ) {
+                <div class="text-danger">
+                    Project name is required.
+                </div>
+            }
+
+        </div>
+
+
+        <!-- Description -->
+        <div class="mb-3">
+
+            <label
+                for="description"
+                class="form-label"
+            >
+                Description
+            </label>
+
+            <textarea
+                id="description"
+                class="form-control"
+                rows="4"
+                formControlName="description"
+            ></textarea>
+
+        </div>
+
+
+        <!-- Start Date -->
+        <div class="mb-3">
+
+            <label
+                for="startDate"
+                class="form-label"
+            >
+                Start Date
+            </label>
+
+            <input
+                type="date"
+                id="startDate"
+                class="form-control"
+                formControlName="startDate"
+            >
+
+            @if (
+                projectForm.get('startDate')?.invalid &&
+                projectForm.get('startDate')?.touched
+            ) {
+                <div class="text-danger">
+                    Start date is required.
+                </div>
+            }
+
+        </div>
+
+
+        <!-- End Date -->
+        <div class="mb-3">
+
+            <label
+                for="endDate"
+                class="form-label"
+            >
+                End Date
+            </label>
+
+            <input
+                type="date"
+                id="endDate"
+                class="form-control"
+                formControlName="endDate"
+            >
+
+            @if (
+                projectForm.get('endDate')?.invalid &&
+                projectForm.get('endDate')?.touched
+            ) {
+                <div class="text-danger">
+                    End date is required.
+                </div>
+            }
+
+        </div>
+
+
+        <!-- Status -->
+        <div class="mb-3">
+
+            <label
+                for="status"
+                class="form-label"
+            >
+                Status
+            </label>
+
+            <select
+                id="status"
+                class="form-select"
+                formControlName="status"
+            >
+
+                <option value="">
+                    Select Status
+                </option>
+
+                <option value="PLANNED">
+                    PLANNED
+                </option>
+
+                <option value="IN_PROGRESS">
+                    IN_PROGRESS
+                </option>
+
+                <option value="COMPLETED">
+                    COMPLETED
+                </option>
+
+                <option value="ON_HOLD">
+                    ON_HOLD
+                </option>
+
+                <option value="CANCELLED">
+                    CANCELLED
+                </option>
+
+            </select>
+
+            @if (
+                projectForm.get('status')?.invalid &&
+                projectForm.get('status')?.touched
+            ) {
+                <div class="text-danger">
+                    Status is required.
+                </div>
+            }
+
+        </div>
+
+
+        <!-- Manager -->
+        <div class="mb-3">
+
+            <label
+                for="managerId"
+                class="form-label"
+            >
+                Manager
+            </label>
+
+            <select
+                id="managerId"
+                class="form-select"
+                formControlName="managerId"
+            >
+
+                <option [ngValue]="null">
+                    Select Manager
+                </option>
+
+                @for (employee of employees; track employee.id) {
+
+                    <option [ngValue]="employee.id">
+
+                        {{ employee.firstName }}
+                        {{ employee.lastName }}
+
+                    </option>
+
+                }
+
+            </select>
+
+            @if (
+                projectForm.get('managerId')?.invalid &&
+                projectForm.get('managerId')?.touched
+            ) {
+                <div class="text-danger">
+                    Manager is required.
+                </div>
+            }
+
+        </div>
+
+
+        <!-- Buttons -->
+        <button
+            type="submit"
+            class="btn btn-primary me-2"
+        >
+            {{ isEditMode ? 'Update Project' : 'Create Project' }}
+        </button>
+
+        <a
+            routerLink="/projects"
+            class="btn btn-secondary"
+        >
+            Cancel
+        </a>
+
+    </form>
+
+</div>

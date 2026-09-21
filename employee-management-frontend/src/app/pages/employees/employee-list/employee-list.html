@@ -1,0 +1,225 @@
+<!-- Header -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h2>Employees</h2>
+
+    <a
+        routerLink="/employees/new"
+        class="btn btn-primary">
+        Add Employee
+    </a>
+
+</div>
+
+
+<!-- Search Section -->
+<div class="row mb-3">
+
+    <div class="col-md-8">
+
+        <input
+            type="text"
+            class="form-control"
+            placeholder="Search employee by first name or last name..."
+            [(ngModel)]="searchKeyword"
+            (keyup.enter)="searchEmployees()">
+
+    </div>
+
+    <div class="col-md-2">
+
+        <button
+            type="button"
+            class="btn btn-primary w-100"
+            (click)="searchEmployees()"
+            [disabled]="isLoading">
+
+            Search
+
+        </button>
+
+    </div>
+
+    <div class="col-md-2">
+
+        <button
+            type="button"
+            class="btn btn-secondary w-100"
+            (click)="clearSearch()"
+            [disabled]="isLoading">
+
+            Clear
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- Loading -->
+@if (isLoading) {
+
+    <div class="text-center my-4">
+
+        <div
+            class="spinner-border"
+            role="status">
+        </div>
+
+        <p class="mt-2">
+            Loading employees...
+        </p>
+
+    </div>
+
+}
+
+
+<!-- Employee Table -->
+@if (!isLoading) {
+
+    <div class="table-responsive">
+
+        <table class="table table-bordered table-hover">
+
+            <thead class="table-dark">
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Designation</th>
+                    <th>Department</th>
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                @for (
+                    employee of employees;
+                    track employee.id
+                ) {
+
+                    <tr>
+
+                        <td>
+                            {{ employee.id }}
+                        </td>
+
+                        <td>
+                            {{ employee.firstName }}
+                            {{ employee.lastName }}
+                        </td>
+
+                        <td>
+                            {{ employee.email }}
+                        </td>
+
+                        <td>
+                            {{ employee.phone }}
+                        </td>
+
+                        <td>
+                            {{ employee.designation }}
+                        </td>
+
+                        <td>
+                            {{ employee.departmentName }}
+                        </td>
+
+                        <td>
+
+                            <a
+                                [routerLink]="[
+                                    '/employees/edit',
+                                    employee.id
+                                ]"
+                                class="btn btn-sm btn-warning me-2">
+
+                                Edit
+
+                            </a>
+
+
+                            <button
+                                type="button"
+                                class="btn btn-sm btn-danger"
+                                (click)="deleteEmployee(employee.id)">
+
+                                Delete
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                }
+
+                @empty {
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            class="text-center">
+
+                            No employees found.
+
+                        </td>
+
+                    </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- Pagination -->
+    @if (totalPages > 0) {
+
+        <div class="d-flex justify-content-between align-items-center mt-3">
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="previousPage()"
+                [disabled]="currentPage === 0">
+
+                Previous
+
+            </button>
+
+
+            <span>
+                Page {{ currentPage + 1 }}
+                of {{ totalPages }}
+            </span>
+
+
+            <button
+                type="button"
+                class="btn btn-primary"
+                (click)="nextPage()"
+                [disabled]="currentPage >= totalPages - 1">
+
+                Next
+
+            </button>
+
+        </div>
+
+    }
+
+}

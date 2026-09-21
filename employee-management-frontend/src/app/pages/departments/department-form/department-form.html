@@ -1,0 +1,98 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h2>
+        {{ isEditMode ? 'Edit Department' : 'Add Department' }}
+    </h2>
+
+
+    <a
+        routerLink="/departments"
+        class="btn btn-secondary">
+
+        Back
+
+    </a>
+
+</div>
+
+
+<form
+    [formGroup]="departmentForm"
+    (ngSubmit)="onSubmit()">
+
+
+    <!-- Department Name -->
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Department Name
+        </label>
+
+
+        <input
+            type="text"
+            class="form-control"
+            formControlName="name">
+
+
+        @if (
+            departmentForm.get('name')?.touched &&
+            departmentForm.get('name')?.invalid
+        ) {
+
+            <div class="text-danger mt-1">
+
+                Department name is required and must be
+                between 2 and 100 characters.
+
+            </div>
+
+        }
+
+    </div>
+
+
+    <!-- Description -->
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            Description
+        </label>
+
+
+        <textarea
+            class="form-control"
+            rows="4"
+            formControlName="description">
+        </textarea>
+
+
+        @if (
+            departmentForm.get('description')?.touched &&
+            departmentForm.get('description')?.invalid
+        ) {
+
+            <div class="text-danger mt-1">
+
+                Description cannot exceed 500 characters.
+
+            </div>
+
+        }
+
+    </div>
+
+
+    <!-- Submit -->
+
+    <button
+        type="submit"
+        class="btn btn-primary">
+
+        {{ isEditMode ? 'Update Department' : 'Save Department' }}
+
+    </button>
+
+</form>

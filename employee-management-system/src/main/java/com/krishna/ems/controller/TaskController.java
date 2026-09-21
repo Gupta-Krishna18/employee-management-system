@@ -1,0 +1,176 @@
+package com.krishna.ems.controller;
+
+import com.krishna.ems.dto.task.TaskRequest;
+import com.krishna.ems.dto.task.TaskResponse;
+import com.krishna.ems.service.TaskService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import com.krishna.ems.dto.task.TaskStatusRequest;
+import com.krishna.ems.dto.task.TaskPriorityRequest;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/tasks")
+public class TaskController {
+
+    private final TaskService taskService;
+
+
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
+
+
+    // =========================================================
+    // CREATE
+    // =========================================================
+
+    @PostMapping
+    public ResponseEntity<TaskResponse> createTask(
+            @Valid @RequestBody TaskRequest request) {
+
+        TaskResponse response =
+                taskService.createTask(request);
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(response);
+    }
+
+
+    // =========================================================
+    // GET ALL
+    // =========================================================
+
+    @GetMapping
+    public ResponseEntity<List<TaskResponse>> getAllTasks() {
+
+        return ResponseEntity.ok(
+                taskService.getAllTasks()
+        );
+    }
+
+
+    // =========================================================
+    // GET TASKS BY PROJECT
+    // =========================================================
+    // Keep this BEFORE /{id}
+
+    @GetMapping("/project/{projectId}")
+    public ResponseEntity<List<TaskResponse>> getTasksByProject(
+            @PathVariable Long projectId) {
+
+        return ResponseEntity.ok(
+                taskService.getTasksByProjectId(projectId)
+        );
+    }
+
+
+    // =========================================================
+    // GET TASKS BY EMPLOYEE
+    // =========================================================
+    // Keep this BEFORE /{id}
+
+    @GetMapping("/employee/{employeeId}")
+    public ResponseEntity<List<TaskResponse>> getTasksByEmployee(
+            @PathVariable Long employeeId) {
+
+        return ResponseEntity.ok(
+                taskService.getTasksByEmployeeId(employeeId)
+        );
+    }
+
+
+    // =========================================================
+    // PHASE 8.1 - ASSIGN / REASSIGN TASK
+    // =========================================================
+
+    @PutMapping("/{taskId}/assign/{employeeId}")
+    public ResponseEntity<TaskResponse> assignTask(
+            @PathVariable Long taskId,
+            @PathVariable Long employeeId) {
+
+        return ResponseEntity.ok(
+                taskService.assignTask(
+                        taskId,
+                        employeeId
+                )
+        );
+    }
+
+
+    // =========================================================
+    // GET BY ID
+    // =========================================================
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TaskResponse> getTaskById(
+            @PathVariable Long id) {
+
+        return ResponseEntity.ok(
+                taskService.getTaskById(id)
+        );
+    }
+
+
+    // =========================================================
+    // UPDATE
+    // =========================================================
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TaskResponse> updateTask(
+            @PathVariable Long id,
+            @Valid @RequestBody TaskRequest request) {
+
+        return ResponseEntity.ok(
+                taskService.updateTask(id, request)
+        );
+    }
+
+
+    @PutMapping("/{taskId}/status")
+    public ResponseEntity<TaskResponse> changeTaskStatus(
+            @PathVariable Long taskId,
+            @Valid @RequestBody TaskStatusRequest request) {
+
+        return ResponseEntity.ok(
+                taskService.changeTaskStatus(taskId, request)
+        );
+    }
+
+    @PutMapping("/{taskId}/priority")
+    public ResponseEntity<TaskResponse> changeTaskPriority(
+            @PathVariable Long taskId,
+            @Valid @RequestBody TaskPriorityRequest request) {
+
+        return ResponseEntity.ok(
+                taskService.changeTaskPriority(taskId, request)
+        );
+    }
+
+    @PutMapping("/{taskId}/complete")
+    public ResponseEntity<TaskResponse> completeTask(
+            @PathVariable Long taskId) {
+
+        return ResponseEntity.ok(
+                taskService.completeTask(taskId)
+        );
+    }
+
+
+    // =========================================================
+    // DELETE
+    // =========================================================
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTask(
+            @PathVariable Long id) {
+
+        taskService.deleteTask(id);
+
+        return ResponseEntity.noContent().build();
+    }
+}

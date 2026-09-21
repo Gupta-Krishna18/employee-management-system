@@ -1,0 +1,92 @@
+# =========================
+
+# Spring Boot / Maven
+
+# =========================
+
+**/target/
+**/.mvn/wrapper/maven-wrapper.jar
+
+# Keep source target directories if required
+
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# =========================
+
+# IntelliJ IDEA
+
+# =========================
+
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# =========================
+
+# Eclipse / STS
+
+# =========================
+
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
+.apt_generated
+
+# =========================
+
+# NetBeans
+
+# =========================
+
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+**/build/
+
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# =========================
+
+# Angular / Node
+
+# =========================
+
+**/node_modules/
+**/dist/
+.angular/
+
+# =========================
+
+# VS Code
+
+# =========================
+
+.vscode/
+
+# =========================
+
+# Environment / Local files
+
+# =========================
+
+.env
+.env.*
+!.env.example
+
+# =========================
+
+# OS generated files
+
+# =========================
+
+.DS_Store
+Thumbs.db
+*.log
